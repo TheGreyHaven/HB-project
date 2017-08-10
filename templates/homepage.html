@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Welcome!</h1>
+<br>
+<br>
+Find and event
+<br>
+<form id='searchForm' action="/results" name="searchForm">
+    Where:
+    <input type="text" name="location" id='location'>
+    Keyword:
+    <input type="text" name="keyWord" id='keyWord'>
+    <select name="cars">
+        <option value="categories">Categories</option>
+        {% for category in categories %}
+            <option id="{{ category }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+</form>
+
