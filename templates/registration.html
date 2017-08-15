@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Get An Account</h1>
+<form action="/registration" method="POST">
+
+    <div>
+        <label>
+            Please enter your email
+            <input type="email" name="email">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Please choose a password
+            <input type="password" name="password">
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Register">
+    </div>
+
+</form>
+
+{% endblock %}

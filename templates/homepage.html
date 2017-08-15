@@ -6,17 +6,19 @@
 <br>
 Find and event
 <br>
-<form id='searchForm' action="/results" name="searchForm">
+<form id='searchForm' action="/search" name="cat_id">
     Where:
     <input type="text" name="location" id='location'>
     Keyword:
     <input type="text" name="keyWord" id='keyWord'>
-    <select name="cars">
-        <option value="categories">Categories</option>
-        {% for category in categories %}
-            <option id="{{ category }}">{{ category }}</option>
+    <select name="cat_id">
+        <option value="categories" name="category">Categories</option>
+        {% for category in cats %}
+            <option  value="{{ category.c_id }}">{{ category.cat }}</option>
         {% endfor %}
     </select>
-    <input type="submit">
+    <button type="submit">submit</button>
 </form>
 
+
+{% endblock %}

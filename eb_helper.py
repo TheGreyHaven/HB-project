@@ -14,12 +14,16 @@ EVENTBRITE_TOKEN = os.getenv('EVENTBRITE_TOKEN')
 EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
 
 
-def find_event(query, location): 
+def find_event(query, location, category_id): 
+    """ Find and return event query from Eventbrite api"""
+  
+
 
     payload = {'q': query,
-               'location.address': location
+               'location.address': location,
+               'categories': category_id
                }
-
+    print payload
     # For GET requests to Eventbrite's API, the token could also be sent as a
     # URL parameter with the key 'token'
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
@@ -31,7 +35,8 @@ def find_event(query, location):
 
     # If the response was successful (with a status code of less than 400),
     # use the list of events from the returned JSON
-  
+    results = []
+    print results
     if response.ok:
         events = data['events']
         for event in events:
@@ -46,33 +51,37 @@ def find_event(query, location):
                 if key == 'text':
                     description = description[key]
             category_id = event['category_id']
-
+            results.append({'name': name, 'url': url, 'category_id': category_id, 'venue_id': venue_id, 'description': description})
            
-
     # If there was an error (status code between 400 and 600)
     else:
         print 'no go'
+    
+    return results
 
 
+#I still need to figure out how to display this information
+#WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP
 def find_event_address(venue_id): 
+    """ use the venue id to get the address of the event"""
 
     payload = {'venue_id': venue_id}
 
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
-    response = requests.get(EVENTBRITE_URL + "events/search/",#change this to venue
+    response = requests.get(EVENTBRITE_URL + "venues" + "/" + str(venue_id),
                             params=payload,
                             headers=headers)
     data = response.json()
+
+    
 
     # If the response was successful (with a status code of less than 400),
     # use the list of events from the returned JSON
   
     if response.ok:
-        events = data['events']
-        for event in events:
-            #check to see if this is what the key is
-            address = event['address']
+        address = data['address']['localized_address_display']
+        
             
 
            
@@ -80,8 +89,8 @@ def find_event_address(venue_id):
 
     # If there was an error (status code between 400 and 600)
     else:
-        print 'no go'
+        print 'no way'
 
-
-
+##I still need to figure out how to display this information
+#WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP
    

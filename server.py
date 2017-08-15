@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, NightOut, User, Event, Category, Restaurant
+from eb_helper import find_event, find_event_address
 
 
 app = Flask(__name__)
@@ -18,14 +19,101 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/homepage')
 def sending_categories():
-    """Homepage."""
+    """Sending categories to the homepage."""
+    cats =[]
 
-    categories = Category.query(categories.c_category).all()
+    for cat, c_id in db.session.query(Category.c_category, Category.c_category_id).all():
+        cats.append({'cat': cat, 'c_id': c_id})
 
-    return render_template("homepage.html", categories=categories)
+    return render_template("homepage.html", cats=cats)
 
 
+@app.route('/search')
+def receiving_search_criteria():
+    """receive the search criteria from homepage"""
 
+    location = request.args.get("location")
+    query = request.args.get("keyWord")
+    category_id = request.args.get("cat_id")
+    
+    results = find_event(query, location, category_id)
+    
+
+    return render_template("results.html", results=results)
+        
+#I want to add a saved event to a database associated with the specific user. Do i need to use Ajax?
+# @app.route('/results')
+# def saving_results():
+#     """save a specific event to the database"""
+
+#     #how do I get these?
+#     event = request.args.get("result.name")
+#     print event 
+
+#     # new_event = Event(e_name=e_name, e_link=e_link)
+
+#     # db.session.add(new_event)
+#     # db.session.commit()
+
+#     return redirect("results")
+
+
+@app.route('/registration')
+def registration_form():
+    """Show registration form"""
+
+    return render_template("registration.html")
+
+
+@app.route('/registration', methods=['POST'])
+def register_process():
+    """Process registration."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+
+    new_user = User(email=email, password=password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return redirect("homepage")
+
+
+@app.route('/login', methods=['GET'])
+def login_form():
+    """Show login form."""
+
+    return render_template("login.html")
+
+@app.route("/users/<int:user_id>")
+def user_detail(user_id):
+    """Show users saved events."""
+
+    user = User.query.get(user_id)
+    return render_template("user.html", user=user)
+
+
+@app.route('/login', methods=['POST'])
+def login_process():
+    """Process login."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return redirect("/login")
+
+    if user.password != password:
+        return redirect("/login")
+
+    session["user_id"] = user.user_id
+
+    return redirect("/users/%s" % user.user_id)
 
 
 
@@ -50,3 +138,6 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
+
+
+

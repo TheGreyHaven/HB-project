@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Results</h1>
+<br>
+<br>
+<br>
+{% for result in results %}
+    <div> Name: {{ result.name }}</div>
+    <a href="{{ result.url }}">Link</a>
+    <div> Description: {{ result.description }}</div>
+    <form action="/results" name="{{ result.name }}">
+        <button>Save</button>
+    <br>
+    <br>
+    </form>
+{% endfor %}
+
+{% endblock %}
