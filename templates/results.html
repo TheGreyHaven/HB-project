@@ -6,14 +6,20 @@
 <br>
 <br>
 {% for result in results %}
-    <div> Name: {{ result.name }}</div>
-    <a href="{{ result.url }}">Link</a>
-    <div> Description: {{ result.description }}</div>
-    <form action="/results" name="{{ result.name }}">
-        <button>Save</button>
-    <br>
-    <br>
+    <form id="{{result.id}}" >
+        <input type="text" name="name" value="{{ result.name }}">
+        <input type="text" name="url" value="{{ result.url }}">
+        <input type="text" name="description" value="{{ result.description }}">
+        <input type="text" name="category_id" value="{{ result.category_id }}">
+        <input type="text" name="address" value="{{ result.venue_id }}">
     </form>
+        <div> Name: {{ result.name }}</div>
+        <a href="{{ result.url }}">Link</a>
+        <div> Description: {{ result.description }}</div>
+        <div>Address: {{ result.venue_id }}
+        <button id="button{{result.id}}" class="saveBtn" data-form-id="{{result.id}}">Save</button>
+        <br>
+        <br>
 {% endfor %}
 
 {% endblock %}

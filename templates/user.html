@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>{{ user.email }} ({{ user.user_id }})</h1>
+<h1>{{ user.email }} ({{ user.user_id }})</h1>
 <h2>Saved Events:</h2>
+
+{% for nightout in saved_nights %}
+<div>{{nightout.event.e_name}}</div>
+<a href="{{ nightout.event.e_link }}">Link</a>
+<div>{{nightout.event.e_description}}</div>
+<br>
+<br>
+{% endfor %}
+
 {% endblock %}

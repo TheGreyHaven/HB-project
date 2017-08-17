@@ -1,6 +1,6 @@
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, NightOut, User, Event, Category, Restaurant
@@ -37,25 +37,36 @@ def receiving_search_criteria():
     category_id = request.args.get("cat_id")
     
     results = find_event(query, location, category_id)
-    
+
 
     return render_template("results.html", results=results)
         
-#I want to add a saved event to a database associated with the specific user. Do i need to use Ajax?
-# @app.route('/results')
-# def saving_results():
-#     """save a specific event to the database"""
 
-#     #how do I get these?
-#     event = request.args.get("result.name")
-#     print event 
+@app.route('/save_event.json', methods=['POST'])
+def saving_event_results():
+    """save a specific event to the database"""
 
-#     # new_event = Event(e_name=e_name, e_link=e_link)
 
-#     # db.session.add(new_event)
-#     # db.session.commit()
+    e_name = request.form.get('name')
+    e_link = request.form.get('url')
+    e_description = request.form.get('description')
+    e_catergory_id = request.form.get('category_id')
+    e_location = request.form.get('address')
+    
+    new_event = Event(e_name=e_name, e_link=e_link, e_description=e_description, e_catergory_id=e_catergory_id, 
+        e_location=e_location)
 
-#     return redirect("results")
+    db.session.add(new_event)
+    #commit() is a two way interaction. Sends event info to my db and can return the event_id. 
+    db.session.commit()
+    
+    user_id = session.get("user_id")
+    new_no_table = NightOut(user_id=user_id, event_id=new_event.event_id)
+
+    db.session.add(new_no_table)
+    db.session.commit()
+
+    return jsonify({"sucess": True})
 
 
 @app.route('/registration')
@@ -90,9 +101,12 @@ def login_form():
 @app.route("/users/<int:user_id>")
 def user_detail(user_id):
     """Show users saved events."""
+    current_user = session.get("user_id")
+
+    saved_nights = db.session.query(NightOut).filter(NightOut.user_id == current_user).all()
 
     user = User.query.get(user_id)
-    return render_template("user.html", user=user)
+    return render_template("user.html", user=user, saved_nights=saved_nights)
 
 
 @app.route('/login', methods=['POST'])
@@ -116,12 +130,7 @@ def login_process():
     return redirect("/users/%s" % user.user_id)
 
 
-
-
-
-
-
-
+    
 
 
 

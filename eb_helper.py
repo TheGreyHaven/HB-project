@@ -23,7 +23,7 @@ def find_event(query, location, category_id):
                'location.address': location,
                'categories': category_id
                }
-    print payload
+    
     # For GET requests to Eventbrite's API, the token could also be sent as a
     # URL parameter with the key 'token'
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
@@ -36,7 +36,7 @@ def find_event(query, location, category_id):
     # If the response was successful (with a status code of less than 400),
     # use the list of events from the returned JSON
     results = []
-    print results
+    
     if response.ok:
         events = data['events']
         for event in events:
@@ -45,14 +45,14 @@ def find_event(query, location, category_id):
                 if key == 'text':
                     name = name[key]
             url = event['url']
-            venue_id = event['venue_id']
+            venue_id = find_event_address(event['venue_id'])
             description = event['description']
             for key in description:
                 if key == 'text':
                     description = description[key]
             category_id = event['category_id']
-            results.append({'name': name, 'url': url, 'category_id': category_id, 'venue_id': venue_id, 'description': description})
-           
+            event_id = event['id']
+            results.append({'name': name, 'url': url, 'category_id': category_id, 'venue_id': venue_id, 'description': description, 'id': event_id})
     # If there was an error (status code between 400 and 600)
     else:
         print 'no go'
@@ -81,7 +81,7 @@ def find_event_address(venue_id):
   
     if response.ok:
         address = data['address']['localized_address_display']
-        
+        return address
             
 
            

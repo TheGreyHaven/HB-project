@@ -28,9 +28,11 @@ class NightOut(db.Model):
                         db.ForeignKey('events.event_id'),
                         nullable=False)
     res_id = db.Column(db.Integer, 
-                        db.ForeignKey('restaurants.res_id'),
-                        nullable=False)
+                        db.ForeignKey('restaurants.res_id'))
     
+
+    event = db.relationship("Event", backref="nightsout")
+    restaurant = db.relationship("Restaurant", backref="nightsout")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -41,7 +43,7 @@ class NightOut(db.Model):
                                                                          self.res_id)
 
 class User(db.Model):
-    """Night out association table."""
+    """users table."""
 
     __tablename__ = "users"
 
@@ -50,6 +52,8 @@ class User(db.Model):
                         primary_key=True)
     password = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(20), nullable=False)
+
+    nightsout = db.relationship("NightOut", backref="users")
 
     
 
@@ -61,7 +65,7 @@ class User(db.Model):
                                                            self.email)
 
 class Category(db.Model):
-    """Night out association table."""
+    """categories table."""
 
     __tablename__ = "categories"
 
@@ -78,20 +82,21 @@ class Category(db.Model):
 
 
 class Event(db.Model):
-    """Night out association table."""
+    """events table."""
 
     __tablename__ = "events"
 
     event_id = db.Column(db.Integer,
+                        autoincrement=True,
                         primary_key=True)
-    e_location = db.Column(db.String(100), nullable=False)
+    e_location = db.Column(db.String(100))
     time = db.Column(db.Integer)
-    date = db.Column(db.String(40), nullable=False)
+    date = db.Column(db.String(40))
     e_catergory_id = db.Column(db.Integer, db.ForeignKey('categories.c_category_id'))
-    e_type = db.Column(db.String(40))
-    e_link = db.Column(db.String(40))
-    e_price = db.Column(db.Integer)
-    e_name = db.Column(db.String(40), nullable=False)
+    e_type = db.Column(db.String(100))
+    e_link = db.Column(db.String(200))
+    e_description = db.Column(db.Text)
+    e_name = db.Column(db.String(200), nullable=False)
 
     
 
@@ -101,11 +106,11 @@ class Event(db.Model):
         return "<Event event_id=%s e_name=%s e_location=%s e_date=%s>" % (self.event_id,
                                                                           self.e_name,
                                                                           self.e_location,
-                                                                          self.e_date)
+                                                                          self.date)
 
 
 class Restaurant(db.Model):
-    """Night out association table."""
+    """restaurants table."""
 
     __tablename__ = "restaurants"
 
@@ -129,18 +134,17 @@ class Restaurant(db.Model):
                                                                    
 
 class Invitee(db.Model):
-    """Night out association table."""
+    """invitees table."""
 
     __tablename__ = "Invitees"
 
     inv_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    status = db.Column(db.String(20), nullable=False)
+    status = db.Column(db.String(20))
     i_email = db.Column(db.String(40))
     no_id = db.Column(db.Integer, 
-                      db.ForeignKey('nightsout.no_id'),
-                      nullable=False)
+                      db.ForeignKey('nightsout.no_id'))
 
     
 
