@@ -11,12 +11,12 @@
         <input type="text" name="url" value="{{ result.url }}">
         <input type="text" name="description" value="{{ result.description }}">
         <input type="text" name="category_id" value="{{ result.category_id }}">
-        <input type="text" name="address" value="{{ result.venue_id }}">
+        <input type="text" name="address" value="{{ result.address }}">
     </form>
         <div> Name: {{ result.name }}</div>
         <a href="{{ result.url }}">Link</a>
         <div> Description: {{ result.description }}</div>
-        <div>Address: {{ result.venue_id }}
+        <div>Address: {{ result.address }}
         <button id="button{{result.id}}" class="saveBtn" data-form-id="{{result.id}}">Save</button>
         <br>
         <br>
