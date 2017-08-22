@@ -3,15 +3,20 @@
 
 <h1>{{ user.email }} ({{ user.user_id }})</h1>
 <h2>Saved Events:</h2>
-
+<!-- I'll have to change the location id later -->
 {% for nightout in saved_nights %}
-<div>{{nightout.event.e_name}}</div>
-<a href="{{ nightout.event.e_link }}">Link</a>
-<div>{{nightout.event.e_description}}</div>
-<div>{{nightout.event.e_location}}</div>
-<button id="{{nightout.event.event_id}}" class="resBtn">Choose a Restaurant</button>
-<br>
-<br>
+    <div class="single-event">
+        <div>{{nightout.event.e_name}}</div>
+        <a href="{{ nightout.event.e_link }}">Link</a>
+        <div>{{nightout.event.e_description}}</div>
+        <div class="location">{{nightout.event.e_location}}</div>
+        <button id="{{nightout.event.event_id}}" class="resBtn">Choose a Restaurant</button>
+        <div class="restaurants"></div>
+    </div>
+    <br>
+    <br>
+    
+
 {% endfor %}
 
 {% endblock %}

@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, NightOut, User, Event, Category, Restaurant
-from eb_helper import find_event, find_event_address
+from eb_helper import find_event, find_event_address, find_yelp_restaurants
 
 
 app = Flask(__name__)
@@ -104,7 +104,7 @@ def user_detail(user_id):
     current_user = session.get("user_id")
 
     saved_nights = db.session.query(NightOut).filter(NightOut.user_id == current_user).all()
-
+    
     user = User.query.get(user_id)
     return render_template("user.html", user=user, saved_nights=saved_nights)
 
@@ -130,10 +130,18 @@ def login_process():
     return redirect("/users/%s" % user.user_id)
 
 
-    
-
-
-
+@app.route('/restaurants', methods=['POST'])
+def return_restaurants():
+    requested_address = request.form.get('address')
+    print "The Address is: "
+    print requested_address
+    yelp_restaurants = find_yelp_restaurants(requested_address)
+    print('*' * 80)
+    print('*' * 80)
+    print(yelp_restaurants)
+    print('*' * 80)
+    print('*' * 80)
+    return jsonify(yelp_restaurants) 
 
 
 if __name__ == "__main__":
@@ -147,6 +155,4 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
-
-
 

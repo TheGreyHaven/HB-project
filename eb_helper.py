@@ -99,6 +99,7 @@ def find_event_address(venue_id):
 
 def find_yelp_restaurants(location):
     """Use yelp Api to find restaurant options"""
+    print location
 
     YELP_URL = "https://api.yelp.com/v3/businesses/search"
 
@@ -108,7 +109,7 @@ def find_yelp_restaurants(location):
 
     # payload = {'location': location }
 
-    payload = {'term': "food", "location": "location", "limit": 3}
+    payload = {'term': "restaurant", "location": location, "limit": 3}
 
 
     response = requests.get(YELP_URL,
@@ -117,8 +118,33 @@ def find_yelp_restaurants(location):
     
     data = response.json()
 
-    print data
-
+    rest_results = []
+    
+    if response.ok:
+        restaurants = data['businesses']
+        for rest in restaurants:
+            name = rest['name']
+            category = rest['categories'][-1]['title']
+            address = rest['location']['display_address']
+            address = " ".join(address)
+            price = rest['price']
+            url = rest['url']
+            rating = rest['rating']
+            yelp_id = rest['id']
+            # print name
+            # print category
+            # print address
+            # print price
+            # print url
+            # print rating
+            # print yelp_id
+            rest_results.append({'name': name, 'url': url, 'yelp_id': yelp_id, 'address': address, 'rating': rating, 'price': price, 'category': category})
+        
+    # If there was an error (status code between 400 and 600)
+    else:
+        print 'not happening'
+    
+    return rest_results
 
 
 def get_yelp_access_token(client_id, client_secret):
@@ -138,9 +164,9 @@ def get_yelp_access_token(client_id, client_secret):
     data = resp.json()
     return data['access_token']
 
+# rest_choices = find_yelp_restaurants('800 sutter st, San Francisco, CA')
+# print rest_choices
 
 
-find_yelp_restaurants("800 sutter st, san francisco")
-
-
+   
    
