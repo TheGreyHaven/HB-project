@@ -130,9 +130,9 @@ def login_process():
     return redirect("/users/%s" % user.user_id)
 
 
-@app.route('/restaurants', methods=['POST'])
+@app.route('/restaurants')
 def return_restaurants():
-    requested_address = request.form.get('address')
+    requested_address = request.args.get('address')
     print "The Address is: "
     print requested_address
     yelp_restaurants = find_yelp_restaurants(requested_address)

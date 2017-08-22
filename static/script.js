@@ -19,7 +19,7 @@ $(".resBtn").on("click", function(evt){
     console.log("the the address is: " + address);
     var restaurantDiv = this.parentElement.getElementsByClassName('restaurants')[0];
     var addressData = {"address": address}
-    $.post("/restaurants", addressData, function(result){
+    $.get("/restaurants", addressData, function(result){
         console.log('result: ');
         console.log(result);
         result.forEach(function(d){
