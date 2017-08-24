@@ -120,7 +120,8 @@ class Restaurant(db.Model):
     r_location = db.Column(db.String(100), nullable=False)
     r_catergory = db.Column(db.String(40))
     r_link = db.Column(db.String(40))
-    r_price = db.Column(db.Integer)
+    r_price = db.Column(db.String(5))
+    r_rating = db.Column(db.String(5))
     r_name = db.Column(db.String(40), nullable=False)
 
     

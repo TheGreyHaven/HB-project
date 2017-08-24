@@ -143,6 +143,36 @@ def return_restaurants():
     print('*' * 80)
     return jsonify(yelp_restaurants) 
 
+@app.route('/save_restaurant.json', methods=['POST'])
+def saving_restaurant_results():
+    """save a specific restaurant to the database"""
+
+    r_name = request.form.get('name')
+    r_location = request.form.get('address')
+    r_rating = request.form.get('rating')
+    r_price = request.form.get('price')
+    nightout_id = request.form.get('nightoutId')
+    
+    new_restaurant = Restaurant.query.filter_by(r_name=r_name, r_location=r_location).first()
+
+    if not new_restaurant:
+        new_restaurant = Restaurant(r_name=r_name, r_rating=r_rating, r_location=r_location, r_price=r_price)
+
+        db.session.add(new_restaurant)
+        db.session.commit()
+    
+    user_id = session.get("user_id")
+    nightout = NightOut.query.get(nightout_id)
+
+    #could also put nightout.res_id = new_restaurant.res_id
+    nightout.restaurant = new_restaurant
+
+    db.session.commit()
+
+
+
+    return jsonify({"sucess": True})
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
