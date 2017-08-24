@@ -59,6 +59,22 @@ $(".restaurants").on("click", ".saveRestBtn", function(evt){
         console.log("I did it");
     });
 });
+//delete the restaurant if user doen't want that restaurant anymore
+$(".deleteResBtn").on("click", function(evt){
+    console.log("yahoo");
+    var nightoutId = this.parentElement.getElementsByClassName('nightoutId')[0].innerHTML;
+    
+    nightoutId = {'noId': nightoutId};
+    $.post("/delete_restaurant.json", nightoutId, function(result){
+        console.log("deleting stuff!");
+    });
+});
+
+
+$(".deleteEventBtn").on("click", function(evt){
+    console.log("haYeah!!");
+    
+});
 
 
 

@@ -25,8 +25,7 @@ class NightOut(db.Model):
                         db.ForeignKey('users.user_id'),
                         nullable=False)
     event_id = db.Column(db.Integer, 
-                        db.ForeignKey('events.event_id'),
-                        nullable=False)
+                        db.ForeignKey('events.event_id'))
     res_id = db.Column(db.Integer, 
                         db.ForeignKey('restaurants.res_id'))
     

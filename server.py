@@ -15,7 +15,7 @@ app.secret_key = "ABC"
 # Normally, if you use an undefined variable in Jinja2, it fails silently.
 # This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
-
+app.jinja_env.auto_reload = True
 
 @app.route('/homepage')
 def sending_categories():
@@ -169,6 +169,20 @@ def saving_restaurant_results():
 
     db.session.commit()
 
+
+
+    return jsonify({"sucess": True})
+
+
+@app.route('/delete_restaurant.json', methods=['POST'])
+def deleting_restaurant_results():
+
+    nightout_id = request.form.get('noId')
+    nightout = NightOut.query.get(nightout_id)
+
+    nightout.res_id = None 
+
+    db.session.commit()
 
 
     return jsonify({"sucess": True})
