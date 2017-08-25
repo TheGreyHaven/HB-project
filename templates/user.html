@@ -3,9 +3,9 @@
 
 <h1>{{ user.email }} ({{ user.user_id }})</h1>
 <h2>Saved Events:</h2>
-<!-- I'll have to change the location id later -->
 {% for nightout in saved_nights %}
     <div class="single-event">
+    {% if nightout.event_id %}
         <div>{{nightout.event.e_name}}</div>
         <a href="{{ nightout.event.e_link }}">Link</a>
         <div>{{nightout.event.e_description}}</div>
@@ -22,9 +22,9 @@
             </div>
             <button id="{{nightout.res_id}}" class="deleteResBtn">Delete This Restaurant</button>
         {% endif %}
+    {% endif %}
     </div>
-    <br>
-    <br>
+    
 
 
 {% endfor %}

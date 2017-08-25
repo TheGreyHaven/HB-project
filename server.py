@@ -176,6 +176,7 @@ def saving_restaurant_results():
 
 @app.route('/delete_restaurant.json', methods=['POST'])
 def deleting_restaurant_results():
+    """delete the users saved restaurant from a specific event"""
 
     nightout_id = request.form.get('noId')
     nightout = NightOut.query.get(nightout_id)
@@ -186,6 +187,24 @@ def deleting_restaurant_results():
 
 
     return jsonify({"sucess": True})
+
+
+@app.route('/delete_event_id.json', methods=['POST'])
+def deleting_saved_events():
+    """delete the users saved event"""
+
+    nightout_id = request.form.get('noId')
+    nightout = NightOut.query.get(nightout_id)
+
+    nightout.event_id = None 
+    nightout.res_id = None 
+
+    db.session.commit()
+
+
+    return jsonify({"sucess": True})
+
+
 
 
 if __name__ == "__main__":

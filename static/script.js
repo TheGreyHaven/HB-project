@@ -66,14 +66,19 @@ $(".deleteResBtn").on("click", function(evt){
     
     nightoutId = {'noId': nightoutId};
     $.post("/delete_restaurant.json", nightoutId, function(result){
-        console.log("deleting stuff!");
+        console.log("deleting restaurants!");
     });
 });
 
 
-$(".deleteEventBtn").on("click", function(evt){
+$(".single-event").on("click", ".deleteEventBtn", function(evt){
     console.log("haYeah!!");
-    
+    this.parentElement.remove();
+    var nightoutId = this.parentElement.getElementsByClassName('nightoutId')[0].innerHTML;
+    nightoutId = {'noId': nightoutId};
+    $.post("/delete_event_id.json", nightoutId, function(evt){
+        console.log('deleting events!');
+    });
 });
 
 
