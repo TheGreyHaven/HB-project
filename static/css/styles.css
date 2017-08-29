@@ -1,0 +1,237 @@
+
+body {
+  background-color: #d9d8c8;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+}
+
+/*Header*/ 
+.container-fluid {
+  background-color: #d9d8c8;
+}
+
+.navbar {
+  border: none;
+}
+
+.navbar-nav {
+  background-color: #d9d8c8;
+}
+.navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 100%;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+  color: #fff;
+}
+
+.navbar-brand {
+  float: left;
+  font-family: 'Oranienbaum', serif;
+  font-size: 400%;
+  line-height: 140%;
+}
+
+a.nav-brand {
+  font-color: #fff;
+}
+
+ul#navList {
+  font-size: 110%;
+  font-family: 'Sanchez', serif;
+  padding: 35px 5% 5% 5%;
+}
+
+
+#myLinks a:link, #myLinks a:visited {
+  color: #fff;
+}
+
+#myLinks a:hover { 
+  color: #bdbdb9;
+  text-decoration: none;
+}
+
+#title a:hover, #title a:focus {
+  text-decoration: none;
+}
+
+#login a:link, #login a:visited {
+  color: #c8a08b;
+  background-color: #fff;
+  padding: 12px;
+}
+
+#login a:hover {
+  color: #bdbdb9;
+}
+
+#register a:link {
+  border: 2px solid white;
+  margin: -1px 0px -1px 10px;
+}
+
+#register .glyphicon .glyphicon-arrow-right {
+  border: none;
+}
+
+.nav>li {
+  margin: 0px 10px;
+}
+
+
+
+
+button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 200%;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 17px;
+    margin-right: 4%;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+
+
+/* main content */
+
+
+
+
+/* xxs */
+@media (max-width: 321px) {
+  
+  /* header */
+  .navbar-brand {
+    font-size: 300%;
+  }
+  .navbar-toggle {
+    padding: -2px 8px 0px 8px;
+    font-size: 190%;
+  }
+  /* main content */
+}
+
+
+
+/* xs 767px and below */
+@media (max-width: 767px){
+
+  /* header */
+  .navbar-brand {
+    padding-left: 7%;
+  }
+
+  #myLinks {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-top-width: 0px;
+    margin-left: 0px;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    text-align: center;
+  }
+  #myLinks a:link, #myLinks a:visited {
+  color: #fff;
+  background-color: transparent;
+  border-top: 2px #fff solid;
+  }
+  
+  #myLinks a:hover { 
+  color: #bdbdb9;
+  text-decoration: none;
+  }
+
+   #register a:link {
+    border: none;
+    margin: 0px 0px 0px 0px;
+    border-top: 2px #fff solid;
+  }
+
+  ul.navbar-right {
+    padding-right: 0px;
+  }
+  ul.nav, ul.navbar-nav {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  #eventSearch a:link {
+    border-top: none;
+  }
+  .navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+  }
+  .navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+  }
+
+}
+
+/* xs 767px and below */
+@media (max-width: 767px){
+
+  /* header */
+  .navbar-brand {
+    padding-left: 7%;
+  }
+
+
+
+/* sm 768-991 */
+
+@media (min-width: 768px) and (max-width: 991px) {
+  
+  /* header */
+
+  .navbar-brand {
+    padding-left: 0;
+  }
+
+  .navbar > .container-fluid .navbar-brand {
+    margin-left: 6%;
+  }
+
+ 
+}
+
+/* md 992-1199 */
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+
+}
+
+/* lg 1200 and more */
+@media (min-width: 1200px) {
+  
+ 
+ 
+}
+
+
+ 
