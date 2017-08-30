@@ -50,7 +50,7 @@ class User(db.Model):
                         autoincrement=True,
                         primary_key=True)
     password = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
 
     nightsout = db.relationship("NightOut", backref="users")
 

@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, NightOut, User, Event, Category, Restaurant
-from eb_helper import find_event, find_event_address, find_yelp_restaurants
+from eb_helper import find_event, find_event_address, find_yelp_restaurants, sending_email_invite
 
 
 app = Flask(__name__)
@@ -89,6 +89,9 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
+    new_user_id = new_user.user_id
+    session["user_id"] = new_user_id
+
     return redirect("homepage")
 
 
@@ -128,6 +131,14 @@ def login_process():
     session["user_id"] = user.user_id
 
     return redirect("/users/%s" % user.user_id)
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    
+    return redirect("/homepage")
 
 
 @app.route('/restaurants')
@@ -204,8 +215,20 @@ def deleting_saved_events():
 
     return jsonify({"sucess": True})
 
+@app.route('/send_mail.json', methods=['POST'])
+def send_mail():
+    """send an invitation with event and restaurant info to a user specified email"""
 
+    event_info = request.form.get('event_info')
+    invitee_email = request.form.get('invitee_email')
+    
+    user_id = session["user_id"]
+    user_email = db.session.query(User.email).filter(User.user_id == user_id).first()[0]
+    
+    sending_email_invite(user_email, invitee_email, event_info)
 
+    return jsonify({"sucess": True})
+    
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

@@ -7,7 +7,7 @@
     <div class="single-event">
     {% if nightout.event_id %}
         <div>{{nightout.event.e_name}}</div>
-        <a href="{{ nightout.event.e_link }}">Link</a>
+        <a href="{{ nightout.event.e_link }}">Eventbrite Link</a>
         <div>{{nightout.event.e_description}}</div>
         <div class="location">{{nightout.event.e_location}}</div>
         <span class="nightoutId" hidden>{{nightout.no_id}}</span>
@@ -21,8 +21,43 @@
                 <div class="savedRestaurantLocation">{{nightout.restaurant.r_location}}</div>
             </div>
             <button id="{{nightout.res_id}}" class="deleteResBtn">Delete This Restaurant</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary inviteBtn" data-toggle="modal" data-target="#exampleModal">
+              Invite A Friend
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rocket off an invite to</h5>
+                    <form class="inviteeEmails">
+                      <input type="email" class="inviteeEmail" name="inviteeEmail">
+                    </form>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="eventName"></div>
+                    <br>
+                    <div class="eventScript"></div>
+                    <div class="evtLocation"></div>
+                    <br>
+                    <div>I thought we could eat at:</div>
+                    <div class="restName"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary modalSendBtn" data-dismiss="modal">Send</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         {% endif %}
     {% endif %}
+    
     </div>
     
 

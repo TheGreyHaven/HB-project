@@ -84,7 +84,31 @@ $(".single-event").on("click", ".deleteEventBtn", function(evt){
     });
 });
 
+$(".inviteBtn").on("click", function(evt){
+    console.log("Invite a frined");
+    var eventName = this.parentElement.children[0].innerText;
+    var eventSrcipt = this.parentElement.children[2].innerHTML;
+    var evtLocation = this.parentElement.children[3].innerHTML;
+    var restName = this.parentElement.children[6].innerText;
+    var evtLink = this.parentElement.children[1];
+    $(".eventName").empty().append(eventName);
+    $(".eventScript").empty().append(eventSrcipt);
+    $(".evtLink").empty().append(evtLink);
+    $(".evtLocation").empty().append(evtLocation);
+    $(".restName").empty().append(restName);
 
 
 
+    console.log("erglkg");
+});
+
+$(".modalSendBtn").on("click", function(evt){
+    var eventInfo = this.parentElement.parentElement.getElementsByClassName("modal-body")[0].innerText
+    var inviteeEmail = $(".inviteeEmail").val();
+    var invitation = {'event_info': eventInfo, 'invitee_email': inviteeEmail};
+    $.post("/send_mail.json", invitation, function(result){
+        console.log("Yay, invitation sent");
+    });
+
+})
 

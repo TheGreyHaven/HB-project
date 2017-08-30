@@ -1,14 +1,19 @@
 
 body {
-  background-color: #d9d8c8;
+  background-color: #f0edce;
   margin: 0;
   padding: 0;
   color: #000000;
+  font-family: 'Sanchez', serif;
+  font-family: 'Roboto Mono', monospace;
+  font-family: 'Share', cursive;
+  font-family: 'Mitr', sans-serif;
+  font-family: 'Timmana', sans-serif;
 }
 
 /*Header*/ 
 .container-fluid {
-  background-color: #d9d8c8;
+  background-color: #f0edce;
 }
 
 .navbar {
@@ -16,7 +21,7 @@ body {
 }
 
 .navbar-nav {
-  background-color: #d9d8c8;
+  background-color: #f0edce;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -25,62 +30,62 @@ body {
 }
 
 .navbar-default .navbar-brand {
-    color: #fff;
+    color: #69bcc5;
 }
 
 .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
-  color: #fff;
+  color: #69bcc5;
 }
 
 .navbar-brand {
   float: left;
-  font-family: 'Oranienbaum', serif;
+  font-family: 'Lobster', cursive;
+  font-family: 'Fontdiner Swanky', cursive;
+  font-family: 'Pattaya', sans-serif;
+  font-family: 'Galada', cursive;
   font-size: 400%;
   line-height: 140%;
 }
 
 a.nav-brand {
-  font-color: #fff;
+  font-color: #69bcc5;
 }
 
 ul#navList {
   font-size: 110%;
-  font-family: 'Sanchez', serif;
+  font-family: 'Purple Purse', cursive;
   padding: 35px 5% 5% 5%;
 }
 
 
-#myLinks a:link, #myLinks a:visited {
-  color: #fff;
-}
-
-#myLinks a:hover { 
-  color: #bdbdb9;
-  text-decoration: none;
-}
-
-#title a:hover, #title a:focus {
-  text-decoration: none;
-}
-
-#login a:link, #login a:visited {
-  color: #c8a08b;
-  background-color: #fff;
-  padding: 12px;
-}
-
-#login a:hover {
-  color: #bdbdb9;
+#myLinks a:visited {
+  color: #e95628;
 }
 
 #register a:link {
+  color: #69bcc5;
   border: 2px solid white;
   margin: -1px 0px -1px 10px;
 }
 
-#register .glyphicon .glyphicon-arrow-right {
-  border: none;
+
+#myLinks a:hover { 
+  color: #69bcc5;
+  text-decoration: none;
 }
+
+
+
+#login a:link, #login a:visited, #logout a:link, #logout a:visited {
+  color: #eec35e;
+  background-color: #fff;
+  padding: 12px;
+}
+
+#login a:hover, #logout a:hover {
+  color: #69bcc5;
+}
+
 
 .nav>li {
   margin: 0px 10px;
@@ -93,7 +98,7 @@ button {
   background-color: transparent;
   border: none;
   color: #fff;
-  font-size: 200%;
+  font-size: 100%;
 }
 
 .navbar-toggle {
@@ -118,8 +123,13 @@ button {
 
 /* main content */
 
+#searchBlock {
+    padding-top: 10%;
+}
 
-
+#location, #keyWord, #categories {
+    border: none;
+}
 
 /* xxs */
 @media (max-width: 321px) {
@@ -154,21 +164,21 @@ button {
     margin-left: 0px;
     width: 100%;
     background-color: transparent;
-    color: #fff;
+    color: #69bcc5;
     text-align: center;
   }
   #myLinks a:link, #myLinks a:visited {
-  color: #fff;
+  color: #69bcc5;
   background-color: transparent;
   border-top: 2px #fff solid;
   }
   
   #myLinks a:hover { 
-  color: #bdbdb9;
+  color: #ecc15e;
   text-decoration: none;
   }
 
-   #register a:link {
+   #register a:link, #userPage a:link {
     border: none;
     margin: 0px 0px 0px 0px;
     border-top: 2px #fff solid;

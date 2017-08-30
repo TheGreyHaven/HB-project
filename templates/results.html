@@ -14,7 +14,7 @@
         <input type="text" name="address" value="{{ result.address }}">
     </form>
         <div> Name: {{ result.name }}</div>
-        <a href="{{ result.url }}">Link</a>
+        <a href="{{ result.url }}" target="_blank">link</a>
         <div> Description: {{ result.description }}</div>
         <div>Address: {{ result.address }}
         <button id="button{{result.id}}" class="saveBtn" data-form-id="{{result.id}}">Save</button>

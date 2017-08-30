@@ -1,7 +1,9 @@
 from pprint import pformat
 import os
 import json
-
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 
 import requests
 from flask import Flask, render_template, request, flash, redirect
@@ -164,8 +166,36 @@ def get_yelp_access_token(client_id, client_secret):
     data = resp.json()
     return data['access_token']
 
-# rest_choices = find_yelp_restaurants('800 sutter st, San Francisco, CA')
-# print rest_choices
+def sending_email_invite(sender, invitee, content):
+    """send an invtation via sendgrid with event and restaurant details"""
+
+    sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+    from_email = Email(sender)
+    to_email = Email(invitee)
+    subject = "You are invited"
+    content = Content("text/plain", content)
+    mail = Mail(from_email, subject, to_email, content)
+    response = sg.client.mail.send.post(request_body=mail.get())
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+
+    return mail
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    
