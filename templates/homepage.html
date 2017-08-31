@@ -6,15 +6,15 @@
     <div class="row">
         <form id='searchForm' action="/search" name="cat_id">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="whereDiv">
-                <div id="where">Where:</div>
+                <div id="whereText">Where:</div>
                 <input type="text" name="location" id='location'>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="keywordDiv">
-                <div id="keyword">Keyword:</div>
+                <div id="keywordText">Keyword:</div>
                 <input type="text" name="keyWord" id='keyWord'>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="catDiv">
-                <div id="keyword">Categories:</div>
+                <div id="categoryText">Categories:</div>
                 <select id="categories" name="cat_id">
                     <option value="categories" name="category"></option>
                     {% for category in cats %}
@@ -27,6 +27,7 @@
             </div>
         </form>
     <div> <!-- /row -->
+    <footer class="footer">Here I am</footer>
 </div> <!-- /container-fluid -->
 
 {% endblock %}
