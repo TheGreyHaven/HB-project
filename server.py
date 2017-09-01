@@ -101,17 +101,6 @@ def login_form():
 
     return render_template("login.html")
 
-@app.route("/users/<int:user_id>")
-def user_detail(user_id):
-    """Show users saved events."""
-    current_user = session.get("user_id")
-
-    saved_nights = db.session.query(NightOut).filter(NightOut.user_id == current_user).all()
-    
-    user = User.query.get(user_id)
-    return render_template("user.html", user=user, saved_nights=saved_nights)
-
-
 @app.route('/login', methods=['POST'])
 def login_process():
     """Process login."""
@@ -131,6 +120,17 @@ def login_process():
     session["user_id"] = user.user_id
 
     return redirect("/users/%s" % user.user_id)
+
+@app.route("/users/<int:user_id>")
+def user_detail(user_id):
+    """Show users saved events."""
+    current_user = session.get("user_id")
+
+    saved_nights = db.session.query(NightOut).filter(NightOut.user_id == current_user).all()
+    
+    user = User.query.get(user_id)
+    return render_template("user.html", user=user, saved_nights=saved_nights)
+
 
 @app.route('/logout')
 def logout():
@@ -172,7 +172,6 @@ def saving_restaurant_results():
         db.session.add(new_restaurant)
         db.session.commit()
     
-    user_id = session.get("user_id")
     nightout = NightOut.query.get(nightout_id)
 
     #could also put nightout.res_id = new_restaurant.res_id

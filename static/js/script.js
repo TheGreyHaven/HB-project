@@ -1,5 +1,13 @@
 "use strict";
 
+$(".infoBtn").on("click", function(evt){
+    console.log("hide me!");
+    this.parentElement.children[3].removeAttribute("hidden");
+    this.parentElement.children[2].removeAttribute("hidden");
+    this.parentElement.children[4].removeAttribute("hidden");
+    $(this).prop('hidden', 'hidden');
+});
+
 $(".saveBtn").on("click", function(evt){
     evt.preventDefault();
     var formId = $(this).data("formId");
@@ -7,7 +15,7 @@ $(".saveBtn").on("click", function(evt){
     // nightoutSpan = this.parentElement.getElementsByClassName('r')
     $.post("/save_event.json", formData, function(result){
         // change save button to saved and disable
-        $("#button" + formId).html("saved");
+        $("#button" + formId).html("Saved");
         $("#button" + formId).prop( "disabled", true );
 
     });
@@ -112,3 +120,6 @@ $(".modalSendBtn").on("click", function(evt){
 
 })
 
+// $(document).ready(function(){
+//     parent.document.getElementById("footerContainer").reload();
+// });

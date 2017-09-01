@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
+<div id="resultsContainer" class="container">
+    <br>
+    {% for result in results %}
+        <form id="{{result.id}}" hidden="true" >
+            <input type="text" name="name" value="{{ result.name }}">
+            <input type="text" name="url" value="{{ result.url }}">
+            <input type="text" name="description" value="{{ result.description }}">
+            <input type="text" name="category_id" value="{{ result.category_id }}">
+            <input type="text" name="address" value="{{ result.address }}">
+        </form>
+        <div class="resultDiv">
+            <h4><div> Name: {{ result.name }}</div></h4>
+            <button class="infoBtn">More Info</button>
+            <a class="eventUrl" hidden="true" href="{{ result.url }}" target="_blank">Eventbrite link</a>
+            <div class="evtScriptDiv" hidden="true">{{ result.description }}</div>
+            <div class="evtAddressDiv" hidden="true ">Address: {{ result.address }}</div>
+            <button id="button{{result.id}}" class="saveBtn" data-form-id="{{result.id}}">Save</button>
+        </div>
+            <br>
 
-<h1>Results</h1>
-<br>
-<br>
-<br>
-{% for result in results %}
-    <form id="{{result.id}}" >
-        <input type="text" name="name" value="{{ result.name }}">
-        <input type="text" name="url" value="{{ result.url }}">
-        <input type="text" name="description" value="{{ result.description }}">
-        <input type="text" name="category_id" value="{{ result.category_id }}">
-        <input type="text" name="address" value="{{ result.address }}">
-    </form>
-        <div> Name: {{ result.name }}</div>
-        <a href="{{ result.url }}" target="_blank">link</a>
-        <div> Description: {{ result.description }}</div>
-        <div>Address: {{ result.address }}
-        <button id="button{{result.id}}" class="saveBtn" data-form-id="{{result.id}}">Save</button>
-        <br>
-        <br>
-{% endfor %}
+    {% endfor %}
+
+    
+
+</div><!-- /container -->
 
 {% endblock %}
-

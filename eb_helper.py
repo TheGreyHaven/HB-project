@@ -46,22 +46,15 @@ def find_event(query, location, category_id):
     if response.ok:
         events = data['events']
         for event in events:
-            name = event['name']
-            for key in name:
-                if key == 'text':
-                    name = name[key]
+            name = event['name']['text']
             url = event['url']
             address = find_event_address(event['venue_id'])
             address = address.strip()
-            description = event['description']
-            for key in description:
-                if key == 'text':
-                    description = description[key]
-                    #I want to clean this up a bit but rstip() 'NoneType' object has no attributrstrip()
-                    #description = description.strip()
+            description = event['description']['text']
             category_id = event['category_id']
             event_id = event['id']
-            results.append({'name': name, 'url': url, 'category_id': category_id, 'address': address, 'description': description, 'id': event_id})
+            results.append({'name': name, 'url': url, 'category_id': category_id, 'address': address, 
+                            'description': description, 'id': event_id})
     # If there was an error (status code between 400 and 600)
     else:
         print 'no go'

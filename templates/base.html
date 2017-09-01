@@ -7,14 +7,6 @@
     <title>Plan-It</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Share" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Timmana" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Purple+Purse" rel="stylesheet">
 
@@ -29,7 +21,11 @@
               <span class="sr-only">Toggle navigation</span>
               <span class="glyphicon glyphicon-option-vertical"></span>
             </button>
-            <a class="navbar-brand" href="/homepage">Plan-It</a>
+            <a class="navbar-brand" href="/homepage">
+              <img class="visible-md visible-lg" src="../static/images/logo300px.png">
+              <img class="visible-sm" src="../static/images/logo240px.png">
+              <img class="visible-xs" src="../static/images/logo200px.png">
+            </a>
           </div>
           <div class="collapse navbar-collapse" id="myLinks">
             <ul class="nav navbar-nav navbar-right" id="navList">
@@ -46,13 +42,11 @@
         </div><!-- /.container fluid-->
       </nav>
     </header>
-    <div class="container">
 
     {% block content %}
         Put your body here.
     {% endblock %}
-
-    </div><!-- /.conainer -->
+  
     <script src="/static/js/jquery-3.1.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/script.js"></script>
