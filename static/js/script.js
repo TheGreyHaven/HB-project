@@ -1,5 +1,16 @@
 "use strict";
 
+// $("#submitButton")
+//     .on('turbolinks:click', function() {
+//         NProgress.start();
+//     })
+//     .on('turbolinks:render', function() {
+//         NProgress.done(); // to work with the above method on first visit
+//         NProgress.remove(); // to work on back btn click, restore event
+//     });
+
+
+
 $(".infoBtn").on("click", function(evt){
     console.log("hide me!");
     this.parentElement.children[3].removeAttribute("hidden");

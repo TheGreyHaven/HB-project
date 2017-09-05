@@ -1,7 +1,7 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, NightOut, User, Event, Category, Restaurant
 from eb_helper import find_event, find_event_address, find_yelp_restaurants, sending_email_invite
@@ -119,7 +119,7 @@ def login_process():
 
     session["user_id"] = user.user_id
 
-    return redirect("/users/%s" % user.user_id)
+    return redirect("/homepage")
 
 @app.route("/users/<int:user_id>")
 def user_detail(user_id):
@@ -232,12 +232,12 @@ def send_mail():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = True
+    # app.debug = True
 
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
 

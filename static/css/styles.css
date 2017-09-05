@@ -1,9 +1,10 @@
 
+
 body {
   background-color: #f0edce;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: #4F4F49;
   font-family: 'Timmana', sans-serif;
 }
 
@@ -34,16 +35,19 @@ body {
 }
 
 
-
 ul#navList {
-  font-size: 110%;
-  font-family: 'Purple Purse', cursive;
-  padding: 35px 5% 5% 0;
+  font-size: 130%;
+  font-family: 'Contrail One', cursive;
 }
 
 #eventSearch a {
     color: #e95628;
 }
+
+h4 {
+  font-family: 'Contrail One', cursive;
+}
+
 
 
 #register a, #userPage a{
@@ -89,6 +93,12 @@ button {
   font-size: 110%;
 }
 
+button:focus {
+  outline: 0;
+}
+
+
+
 .navbar-toggle {
     position: relative;
     float: right;
@@ -110,9 +120,12 @@ button {
 
 
 /* main content */
+select {
+    background-color: #ffffff;
+}
 
 #searchBlock {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 
@@ -177,6 +190,10 @@ button {
   background-color: #eec35e;
 }
 
+.btn-primary:visited, .btn-primary:active  {
+  background-color: #69bcc5;
+}
+
 #userContainer {
   margin-bottom: 5%;
 }
@@ -208,11 +225,18 @@ a.savedEvtLink:hover {
 
 
 
-
+@media (min-width: 1200px){
+  ul#navList {
+  padding: 35px 5% 5% 0;
+  }
+}
 
 /* md 992-1199 */
 @media (max-width: 1199px) {
 
+  ul#navList {
+  padding: 35px 5% 5% 0;
+  }
 }
 
 
@@ -221,7 +245,9 @@ a.savedEvtLink:hover {
 @media (max-width: 991px) {
   
   /* header */
-
+  ul#navList {
+  padding: 35px 5% 5% 0;
+  }
  
 }
 
@@ -229,9 +255,13 @@ a.savedEvtLink:hover {
 /* xs 767px and below */
 @media (max-width: 767px){
 
-  /* header */
+ /* /* header */
   .navbar-brand {
     padding-left: 7%;
+  }
+
+  ul#navList {
+  padding: 10px 0% 0% 0%;
   }
 
   #myLinks {
@@ -282,6 +312,10 @@ a.savedEvtLink:hover {
   .navbar-default .navbar-toggle:focus {
     background-color: transparent;
   }
+  .navbar-toggle {
+    padding: -2px 8px 0px 8px;
+    font-size: 170%;
+  }
 
 }
 
@@ -289,6 +323,10 @@ a.savedEvtLink:hover {
 @media (max-width: 321px) {
   
   /* header */
+  ul#navList {
+  padding: 10px 0% 0% 0%;
+  }
+
   .navbar-brand {
     font-size: 300%;
   }
